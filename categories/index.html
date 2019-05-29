@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Elibaron">
 <meta property="og:description" content="自古万事皆成空,何人能够尽从容">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-29T00:33:51.533Z">
+<meta property="og:updated_time" content="2019-05-29T00:51:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="categories">
 <meta name="twitter:description" content="自古万事皆成空,何人能够尽从容">
@@ -390,10 +390,6 @@
 
           </div>
           
-
-  
-
-
 
         </div>
         
@@ -708,9 +704,37 @@
   
 
   
-
-
   
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: '7d6PAdBGCH7JC86MGpcGeGOS-gzGzoHsz',
+    appKey: 'TCP2quyWfPxbNRFx6W6LlqRH',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
 
 
   

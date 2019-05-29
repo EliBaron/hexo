@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Elibaron">
 <meta property="og:description" content="关于站长喜欢这种宁静的生活 本站介绍本站创建于2019年5月28日">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-29T00:33:42.573Z">
+<meta property="og:updated_time" content="2019-05-29T00:52:15.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="about">
 <meta name="twitter:description" content="关于站长喜欢这种宁静的生活 本站介绍本站创建于2019年5月28日">
@@ -379,10 +379,6 @@
 
           </div>
           
-
-  
-
-
 
         </div>
         
@@ -723,9 +719,37 @@
   
 
   
-
-
   
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: true,
+    notify: true,
+    appId: '7d6PAdBGCH7JC86MGpcGeGOS-gzGzoHsz',
+    appKey: 'TCP2quyWfPxbNRFx6W6LlqRH',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
 
 
   
