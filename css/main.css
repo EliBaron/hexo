@@ -1843,7 +1843,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #eda4ff;
+  background: #66ff61;
 }
 .feed-link,
 .chat {
@@ -2553,7 +2553,6 @@ embed {
   display: inline-block;
 }
 body {
-  background: url("https://source.unsplash.com/random/1920x900");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50% 50%;
