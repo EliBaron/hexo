@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-30T01:36:00.328Z</updated>
+  <updated>2019-05-30T02:42:22.545Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -18,22 +18,16 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2019/05/28/hello-world/"/>
-    <id>http://yoursite.com/2019/05/28/hello-world/</id>
-    <published>2019-05-28T06:50:33.329Z</published>
-    <updated>2019-05-30T01:36:00.328Z</updated>
+    <link href="http://yoursite.com/2019/05/30/hello-world/"/>
+    <id>http://yoursite.com/2019/05/30/hello-world/</id>
+    <published>2019-05-30T02:40:59.000Z</published>
+    <updated>2019-05-30T02:42:22.545Z</updated>
     
-    <content type="html"><![CDATA[<p>我们需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>My Blog</strong> 给我们答案 —— 我为记录思想和分享知识整理更专业的工具。 您可以使用 Hexo 搭建属于您自己的个人Blog：</p><blockquote><ul><li>整理知识，学习笔记</li><li>发布日记，杂文，所见所想</li><li>撰写发布技术文稿（代码支持）</li><li>撰写发布学术论文（LaTeX 公式支持）<a id="more"></a></li></ul></blockquote>]]></content>
+    <content type="html"><![CDATA[<p>我们使用Hexo更便捷更高效的开源工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，您也可以使用 Hexo 搭建属于您自己的个人Blog！<br><a id="more"></a></p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;我们需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，&lt;strong&gt;My Blog&lt;/strong&gt; 给我们答案 —— 我为记录思想和分享知识整理更专业的工具。 您可以使用 Hexo 搭建属于您自己的个人Blog：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;整理知识，学习笔记&lt;/li&gt;
-&lt;li&gt;发布日记，杂文，所见所想&lt;/li&gt;
-&lt;li&gt;撰写发布技术文稿（代码支持）&lt;/li&gt;
-&lt;li&gt;撰写发布学术论文（LaTeX 公式支持）
+      &lt;p&gt;我们使用Hexo更便捷更高效的开源工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，您也可以使用 Hexo 搭建属于您自己的个人Blog！&lt;br&gt;
     
     </summary>
     
