@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-16T12:51:59.216Z</updated>
+  <updated>2019-08-17T00:58:06.708Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,13 @@
     <link href="http://yoursite.com/2019/08/16/first-day/"/>
     <id>http://yoursite.com/2019/08/16/first-day/</id>
     <published>2019-08-16T12:51:28.000Z</published>
-    <updated>2019-08-16T12:51:59.216Z</updated>
+    <updated>2019-08-17T00:58:06.708Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们使用Hexo更便捷更高效的开源工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，您也可以使用 Hexo 搭建属于您自己的个人Blog！<br><a id="more"></a></p>]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;我们使用Hexo更便捷更高效的开源工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，您也可以使用 Hexo 搭建属于您自己的个人Blog！&lt;br&gt;
     
     </summary>
     
