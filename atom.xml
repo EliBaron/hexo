@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-17T00:58:06.708Z</updated>
+  <updated>2019-08-17T00:59:41.066Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,13 +21,227 @@
     <link href="http://yoursite.com/2019/08/16/first-day/"/>
     <id>http://yoursite.com/2019/08/16/first-day/</id>
     <published>2019-08-16T12:51:28.000Z</published>
-    <updated>2019-08-17T00:58:06.708Z</updated>
+    <updated>2019-08-17T00:59:41.066Z</updated>
     
-    <content type="html"><![CDATA[<p>我们使用Hexo更便捷更高效的开源工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，您也可以使用 Hexo 搭建属于您自己的个人Blog！<br><a id="more"></a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h2><h3 id="Eureka客户端"><a href="#Eureka客户端" class="headerlink" title="Eureka客户端"></a>Eureka客户端</h3><ul><li><p>向<code>Eureka</code>注册服务</p></li><li><p>高可用(HA)</p><ul><li><p>多注册中心主机</p><p>如果配置了多个Eureka注册服务器，那么默认情况只有一台可用的服务器，存在注册信息。如果Down掉了，则会选择下一台可用的Eureka服务器。</p></li></ul></li><li><p>配置</p><ul><li><p>应用间隔</p><p><code>registry-fetch-interval-seconds:</code>30 去服务端获取注册信息的间隔时间</p></li><li><p>同步间隔</p><p><code>instance-info-replication-interval-seconds:</code>30 更新实例信息的变化到服务端的间隔时间</p></li></ul><p><a href="http://cloud.spring.io/spring-cloud-static/Dalston.SR4/single/spring-cloud.html#_appendix_compendium_of_configuration_properties" target="_blank" rel="noopener">参考链接</a></p></li><li><p>注意</p><ul><li>端口不要使用0</li><li>Eureka缓存<ol><li>Eureka Server对注册列表进行缓存，默认时间为30s。</li><li>Eureka Client对获取到的注册信息进行缓存，默认时间为30s。</li><li>Ribbon会从上面提到的Eureka Client获取服务列表，将负载均衡后的结果缓存30s。</li></ol></li></ul></li></ul><h3 id="Eureka服务端"><a href="#Eureka服务端" class="headerlink" title="Eureka服务端"></a>Eureka服务端</h3><p><img src="http://qiniu.itliusir.com/Eureka.png" alt="img"></p><ul><li>注册中心对比</li></ul><table><thead><tr><th style="text-align:center"><code>Feature</code></th><th style="text-align:center"><a href="https://github.com/hashicorp/consul" target="_blank" rel="noopener">Consul</a></th><th style="text-align:center"><a href="https://github.com/apache/zookeeper" target="_blank" rel="noopener">zookeeper</a></th><th style="text-align:center"><a href="https://github.com/coreos/etcd" target="_blank" rel="noopener">etcd</a></th><th style="text-align:center"><a href="https://github.com/Netflix/eureka" target="_blank" rel="noopener">euerka</a></th></tr></thead><tbody><tr><td style="text-align:center">服务健康检查</td><td style="text-align:center">服务状态，内存，硬盘等</td><td style="text-align:center">(弱)长连接，<code>keepalive</code></td><td style="text-align:center">连接心跳</td><td style="text-align:center">可配支持</td></tr><tr><td style="text-align:center">多数据中心</td><td style="text-align:center">支持</td><td style="text-align:center">—</td><td style="text-align:center">—</td><td style="text-align:center">—</td></tr><tr><td style="text-align:center">kv存储服务</td><td style="text-align:center">支持</td><td style="text-align:center">支持</td><td style="text-align:center">支持</td><td style="text-align:center">—</td></tr><tr><td style="text-align:center">一致性</td><td style="text-align:center"><code>raft</code></td><td style="text-align:center"><code>paxos</code></td><td style="text-align:center"><code>raft</code></td><td style="text-align:center">—</td></tr><tr><td style="text-align:center"><code>cap</code></td><td style="text-align:center"><code>ca</code></td><td style="text-align:center"><code>cp</code></td><td style="text-align:center"><code>cp</code></td><td style="text-align:center"><code>ap</code></td></tr><tr><td style="text-align:center">使用接口(多语言能力)</td><td style="text-align:center">支持<code>http</code>和<code>dns</code></td><td style="text-align:center">客户端</td><td style="text-align:center"><code>http/grpc</code></td><td style="text-align:center"><code>http</code>（sidecar）</td></tr><tr><td style="text-align:center">watch支持</td><td style="text-align:center">全量/支持long polling</td><td style="text-align:center">支持</td><td style="text-align:center">支持 long polling</td><td style="text-align:center">支持 long polling/大部分增量</td></tr><tr><td style="text-align:center">自身监控</td><td style="text-align:center"><code>metrics</code></td><td style="text-align:center">—</td><td style="text-align:center"><code>metrics</code></td><td style="text-align:center"><code>metrics</code></td></tr><tr><td style="text-align:center">安全</td><td style="text-align:center"><code>acl /https</code></td><td style="text-align:center"><code>acl</code></td><td style="text-align:center"><code>https</code>支持（弱）</td><td style="text-align:center">—</td></tr><tr><td style="text-align:center">spring cloud集成</td><td style="text-align:center">已支持</td><td style="text-align:center">已支持</td><td style="text-align:center">已支持</td><td style="text-align:center">已支持</td></tr></tbody></table><ul><li><p>CAP</p><ul><li><p><em>C</em> <strong>数据一致性</strong>     一致性是指数据的原子性，在经典的数据库中通过事务来保障，事务完成时，无论成功或回滚，数据都会处于一致的状态，在分布式环境下，一致性是指多个节点数据是否一致</p><p><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener">raft</a> </p></li><li><p><em>A</em> <strong>服务可用性</strong> 服务一直保持可用的状态，当用户发出一个请求，服务能在一定的时间内返回结果</p></li><li><p><em>P</em> <strong>网络分区故障的容错性</strong> 在分布式应用中，可能因为一些分布式的原因导致系统无法运转，好的分区容忍性，使应用虽然是一个分布式系统，但是好像一个可以正常运转的整体</p></li></ul></li><li><p>Consul</p><ul><li>服务发现</li><li>健康检查</li><li>键值存储</li><li>多数据中心</li></ul><p><a href="https://www.consul.io/intro/index.html" target="_blank" rel="noopener">官网</a></p><p><a href="http://cloud.spring.io/spring-cloud-consul/" target="_blank" rel="noopener">Spring Cloud Consul 参考文档</a></p></li><li><p>Eureka Server高可用配置</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  profiles:</span> <span class="string">peer1</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">peer1</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    serviceUrl:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://peer2/eureka/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  profiles:</span> <span class="string">peer2</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="string">peer2</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    serviceUrl:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://peer1/eureka/</span></span><br></pre></td></tr></table></figure><p><a href="http://cloud.spring.io/spring-cloud-static/Dalston.SR4/single/spring-cloud.html#_peer_awareness" target="_blank" rel="noopener">参考文档</a></p></li></ul><h2 id="Spring-Cloud-Ribbon"><a href="#Spring-Cloud-Ribbon" class="headerlink" title="Spring Cloud Ribbon"></a>Spring Cloud Ribbon</h2><p>主要功能是为REST客户端实现负载均衡</p><h3 id="Netflix-Ribbon"><a href="#Netflix-Ribbon" class="headerlink" title="Netflix Ribbon"></a>Netflix Ribbon</h3><ul><li><p>依赖</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-ribbon<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p>Ribbon 客户端</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@RibbonClients</span>(&#123;</span><br><span class="line">        <span class="meta">@RibbonClient</span>(name = <span class="string">"service-provider"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>配置</p><p><code>application.properties</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service-provider.ribbon.listOfServers = \</span><br><span class="line">  http://$&#123;host&#125;:$&#123;port&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="Netflix-Ribbon-整合-Eureka"><a href="#Netflix-Ribbon-整合-Eureka" class="headerlink" title="Netflix Ribbon 整合 Eureka"></a>Netflix Ribbon 整合 Eureka</h3><ul><li><p>Ribbon 客户端</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@RibbonClients</span>(&#123;</span><br><span class="line">        <span class="meta">@RibbonClient</span>(name = <span class="string">"service-provider"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line">  <span class="meta">@LoadBalanced</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>配置</p></li></ul><h2 id="Spring-Cloud-OpenFeign"><a href="#Spring-Cloud-OpenFeign" class="headerlink" title="Spring Cloud OpenFeign"></a>Spring Cloud OpenFeign</h2><ul><li><p>发展</p><p>9.0.0版本之后groupId <code>io.netflix.feign</code>更改为<code>io.github.openfeign</code></p><p>对应依赖<code>spring-cloud-starter-feign</code>–&gt;<code>spring-cloud-starter-openfeign</code></p></li><li><p>依赖</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-feign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p>feign 客户端</p><p><code>Application.java</code></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>feignClient.java</code></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"ms-business-task-engine-server"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ITaskEngineService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/TaskQueue/addTaskToQueue"</span>,method = RequestMethod.POST)</span><br><span class="line">    <span class="function">BaseResponse <span class="title">addTaskToQueue</span><span class="params">(@RequestBody List&lt;SubTaskDTO&gt; subTaskDTOList)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>配置参考ribbon</p></li></ul><h2 id="Spring-Cloud-Hystrix"><a href="#Spring-Cloud-Hystrix" class="headerlink" title="Spring Cloud Hystrix"></a>Spring Cloud Hystrix</h2><p>hystrix可帮助隔离每个服务，使单个服务的响应失败，避免微服务架构中因个别服务出现异常而引起级联故障蔓延。</p><h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul><li>断路器机制(断路–&gt;半开–&gt;恢复)</li><li>资源隔离</li><li>熔断降级</li></ul><h3 id="Hystrix-Dashboard-监控"><a href="#Hystrix-Dashboard-监控" class="headerlink" title="Hystrix Dashboard 监控"></a>Hystrix Dashboard 监控</h3><h2 id="Spring-Cloud-Zuul"><a href="#Spring-Cloud-Zuul" class="headerlink" title="Spring Cloud Zuul"></a>Spring Cloud Zuul</h2><p>在没有网关的时候，随着系统不断庞大，运维维护越来越复杂，接口校验逻辑的冗余越来越多，校验逻辑升级更为复杂。</p><h3 id="ZuulFilter"><a href="#ZuulFilter" class="headerlink" title="ZuulFilter"></a>ZuulFilter</h3><h4 id="过滤器类型"><a href="#过滤器类型" class="headerlink" title="过滤器类型"></a>过滤器类型</h4><ul><li>pre 路由之前执行</li><li>route 路由请求时被调用</li><li>post 在route和error过滤器之后被过滤</li><li>error 处理请求发生错误时候被调用</li></ul><h4 id="过滤器执行顺序"><a href="#过滤器执行顺序" class="headerlink" title="过滤器执行顺序"></a>过滤器执行顺序</h4><ul><li>order越小，优先级越高</li></ul><h4 id="过滤器是否被执行"><a href="#过滤器是否被执行" class="headerlink" title="过滤器是否被执行"></a>过滤器是否被执行</h4><ul><li>shouldFilter = true(结合yaml控制开启)</li></ul><h4 id="过滤器具体逻辑"><a href="#过滤器具体逻辑" class="headerlink" title="过滤器具体逻辑"></a>过滤器具体逻辑</h4><ul><li>run()</li></ul><h3 id="Routes"><a href="#Routes" class="headerlink" title="Routes"></a>Routes</h3><p>路由规则与列表</p><h2 id="Spring-Cloud-Sidecar"><a href="#Spring-Cloud-Sidecar" class="headerlink" title="Spring Cloud Sidecar"></a>Spring Cloud Sidecar</h2><h3 id="非JVM语言接入SpringCloud的两种方案"><a href="#非JVM语言接入SpringCloud的两种方案" class="headerlink" title="非JVM语言接入SpringCloud的两种方案"></a>非JVM语言接入SpringCloud的两种方案</h3><ul><li>Sidecar<ul><li>必须去实现一个健康检查接口</li><li>只有状态，服务治理只能从网关层控制流量</li></ul></li><li>自己实现注册中心API Http接口(推荐)</li></ul><a id="more"></a>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;我们使用Hexo更便捷更高效的开源工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，您也可以使用 Hexo 搭建属于您自己的个人Blog！&lt;br&gt;
+      &lt;h2 id=&quot;Spring-Cloud-Eureka&quot;&gt;&lt;a href=&quot;#Spring-Cloud-Eureka&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud Eureka&quot;&gt;&lt;/a&gt;Spring Cloud Eureka&lt;/h2&gt;&lt;h3 id=&quot;Eureka客户端&quot;&gt;&lt;a href=&quot;#Eureka客户端&quot; class=&quot;headerlink&quot; title=&quot;Eureka客户端&quot;&gt;&lt;/a&gt;Eureka客户端&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;向&lt;code&gt;Eureka&lt;/code&gt;注册服务&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;高可用(HA)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;多注册中心主机&lt;/p&gt;
+&lt;p&gt;如果配置了多个Eureka注册服务器，那么默认情况只有一台可用的服务器，存在注册信息。如果Down掉了，则会选择下一台可用的Eureka服务器。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;应用间隔&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;registry-fetch-interval-seconds:&lt;/code&gt;30 去服务端获取注册信息的间隔时间&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;同步间隔&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;instance-info-replication-interval-seconds:&lt;/code&gt;30 更新实例信息的变化到服务端的间隔时间&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;http://cloud.spring.io/spring-cloud-static/Dalston.SR4/single/spring-cloud.html#_appendix_compendium_of_configuration_properties&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;注意&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;端口不要使用0&lt;/li&gt;
+&lt;li&gt;Eureka缓存&lt;ol&gt;
+&lt;li&gt;Eureka Server对注册列表进行缓存，默认时间为30s。&lt;/li&gt;
+&lt;li&gt;Eureka Client对获取到的注册信息进行缓存，默认时间为30s。&lt;/li&gt;
+&lt;li&gt;Ribbon会从上面提到的Eureka Client获取服务列表，将负载均衡后的结果缓存30s。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;Eureka服务端&quot;&gt;&lt;a href=&quot;#Eureka服务端&quot; class=&quot;headerlink&quot; title=&quot;Eureka服务端&quot;&gt;&lt;/a&gt;Eureka服务端&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://qiniu.itliusir.com/Eureka.png&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;注册中心对比&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;code&gt;Feature&lt;/code&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;https://github.com/hashicorp/consul&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Consul&lt;/a&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;https://github.com/apache/zookeeper&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;zookeeper&lt;/a&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;https://github.com/coreos/etcd&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;etcd&lt;/a&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;https://github.com/Netflix/eureka&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;euerka&lt;/a&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;服务健康检查&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;服务状态，内存，硬盘等&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;(弱)长连接，&lt;code&gt;keepalive&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;连接心跳&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;可配支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;多数据中心&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;—&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;—&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;—&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;kv存储服务&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;—&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;一致性&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;raft&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;paxos&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;raft&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;—&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;cap&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;ca&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;cp&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;cp&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;ap&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;使用接口(多语言能力)&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;支持&lt;code&gt;http&lt;/code&gt;和&lt;code&gt;dns&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;客户端&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;http/grpc&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;http&lt;/code&gt;（sidecar）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;watch支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;全量/支持long polling&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;支持 long polling&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;支持 long polling/大部分增量&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;自身监控&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;metrics&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;—&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;metrics&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;metrics&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;安全&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;acl /https&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;acl&lt;/code&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;code&gt;https&lt;/code&gt;支持（弱）&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;—&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;spring cloud集成&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;已支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;已支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;已支持&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;已支持&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;CAP&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;C&lt;/em&gt; &lt;strong&gt;数据一致性&lt;/strong&gt;     一致性是指数据的原子性，在经典的数据库中通过事务来保障，事务完成时，无论成功或回滚，数据都会处于一致的状态，在分布式环境下，一致性是指多个节点数据是否一致&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://thesecretlivesofdata.com/raft/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;raft&lt;/a&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;A&lt;/em&gt; &lt;strong&gt;服务可用性&lt;/strong&gt; 服务一直保持可用的状态，当用户发出一个请求，服务能在一定的时间内返回结果&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;P&lt;/em&gt; &lt;strong&gt;网络分区故障的容错性&lt;/strong&gt; 在分布式应用中，可能因为一些分布式的原因导致系统无法运转，好的分区容忍性，使应用虽然是一个分布式系统，但是好像一个可以正常运转的整体&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Consul&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;服务发现&lt;/li&gt;
+&lt;li&gt;健康检查&lt;/li&gt;
+&lt;li&gt;键值存储&lt;/li&gt;
+&lt;li&gt;多数据中心&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.consul.io/intro/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;官网&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://cloud.spring.io/spring-cloud-consul/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Spring Cloud Consul 参考文档&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Eureka Server高可用配置&lt;/p&gt;
+&lt;figure class=&quot;highlight yaml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;---&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;spring:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;  profiles:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;peer1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;eureka:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;  instance:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;    hostname:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;peer1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;  client:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;    serviceUrl:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;      defaultZone:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;http://peer2/eureka/&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;---&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;spring:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;  profiles:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;peer2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;eureka:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;  instance:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;    hostname:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;peer2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;  client:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;    serviceUrl:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;      defaultZone:&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;http://peer1/eureka/&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;a href=&quot;http://cloud.spring.io/spring-cloud-static/Dalston.SR4/single/spring-cloud.html#_peer_awareness&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;参考文档&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Spring-Cloud-Ribbon&quot;&gt;&lt;a href=&quot;#Spring-Cloud-Ribbon&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud Ribbon&quot;&gt;&lt;/a&gt;Spring Cloud Ribbon&lt;/h2&gt;&lt;p&gt;主要功能是为REST客户端实现负载均衡&lt;/p&gt;
+&lt;h3 id=&quot;Netflix-Ribbon&quot;&gt;&lt;a href=&quot;#Netflix-Ribbon&quot; class=&quot;headerlink&quot; title=&quot;Netflix Ribbon&quot;&gt;&lt;/a&gt;Netflix Ribbon&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;依赖&lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-cloud-starter-ribbon&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Ribbon 客户端&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@SpringBootApplication&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@RibbonClients&lt;/span&gt;(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;meta&quot;&gt;@RibbonClient&lt;/span&gt;(name = &lt;span class=&quot;string&quot;&gt;&quot;service-provider&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Application&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;meta&quot;&gt;@Bean&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; RestTemplate &lt;span class=&quot;title&quot;&gt;restTemplate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; RestTemplate();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;application.properties&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;service-provider.ribbon.listOfServers = \&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  http://$&amp;#123;host&amp;#125;:$&amp;#123;port&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;Netflix-Ribbon-整合-Eureka&quot;&gt;&lt;a href=&quot;#Netflix-Ribbon-整合-Eureka&quot; class=&quot;headerlink&quot; title=&quot;Netflix Ribbon 整合 Eureka&quot;&gt;&lt;/a&gt;Netflix Ribbon 整合 Eureka&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Ribbon 客户端&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@SpringBootApplication&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@RibbonClients&lt;/span&gt;(&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;meta&quot;&gt;@RibbonClient&lt;/span&gt;(name = &lt;span class=&quot;string&quot;&gt;&quot;service-provider&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@EnableDiscoveryClient&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Application&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;meta&quot;&gt;@Bean&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  	&lt;span class=&quot;meta&quot;&gt;@LoadBalanced&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; RestTemplate &lt;span class=&quot;title&quot;&gt;restTemplate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; RestTemplate();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Spring-Cloud-OpenFeign&quot;&gt;&lt;a href=&quot;#Spring-Cloud-OpenFeign&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud OpenFeign&quot;&gt;&lt;/a&gt;Spring Cloud OpenFeign&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;发展&lt;/p&gt;
+&lt;p&gt;9.0.0版本之后groupId &lt;code&gt;io.netflix.feign&lt;/code&gt;更改为&lt;code&gt;io.github.openfeign&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;对应依赖&lt;code&gt;spring-cloud-starter-feign&lt;/code&gt;–&amp;gt;&lt;code&gt;spring-cloud-starter-openfeign&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;依赖&lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;org.springframework.cloud&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;groupId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;spring-cloud-starter-feign&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;artifactId&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;dependency&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;feign 客户端&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Application.java&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@SpringBootApplication&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@EnableFeignClients&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Application&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String[] args)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        SpringApplication.run(Application.class, args);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;feignClient.java&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@FeignClient&lt;/span&gt;(value = &lt;span class=&quot;string&quot;&gt;&quot;ms-business-task-engine-server&quot;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;ITaskEngineService&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@RequestMapping&lt;/span&gt;(value = &lt;span class=&quot;string&quot;&gt;&quot;/TaskQueue/addTaskToQueue&quot;&lt;/span&gt;,method = RequestMethod.POST)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;BaseResponse &lt;span class=&quot;title&quot;&gt;addTaskToQueue&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(@RequestBody List&amp;lt;SubTaskDTO&amp;gt; subTaskDTOList)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;配置参考ribbon&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;Spring-Cloud-Hystrix&quot;&gt;&lt;a href=&quot;#Spring-Cloud-Hystrix&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud Hystrix&quot;&gt;&lt;/a&gt;Spring Cloud Hystrix&lt;/h2&gt;&lt;p&gt;hystrix可帮助隔离每个服务，使单个服务的响应失败，避免微服务架构中因个别服务出现异常而引起级联故障蔓延。&lt;/p&gt;
+&lt;h3 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;断路器机制(断路–&amp;gt;半开–&amp;gt;恢复)&lt;/li&gt;
+&lt;li&gt;资源隔离&lt;/li&gt;
+&lt;li&gt;熔断降级&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;Hystrix-Dashboard-监控&quot;&gt;&lt;a href=&quot;#Hystrix-Dashboard-监控&quot; class=&quot;headerlink&quot; title=&quot;Hystrix Dashboard 监控&quot;&gt;&lt;/a&gt;Hystrix Dashboard 监控&lt;/h3&gt;&lt;h2 id=&quot;Spring-Cloud-Zuul&quot;&gt;&lt;a href=&quot;#Spring-Cloud-Zuul&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud Zuul&quot;&gt;&lt;/a&gt;Spring Cloud Zuul&lt;/h2&gt;&lt;p&gt;在没有网关的时候，随着系统不断庞大，运维维护越来越复杂，接口校验逻辑的冗余越来越多，校验逻辑升级更为复杂。&lt;/p&gt;
+&lt;h3 id=&quot;ZuulFilter&quot;&gt;&lt;a href=&quot;#ZuulFilter&quot; class=&quot;headerlink&quot; title=&quot;ZuulFilter&quot;&gt;&lt;/a&gt;ZuulFilter&lt;/h3&gt;&lt;h4 id=&quot;过滤器类型&quot;&gt;&lt;a href=&quot;#过滤器类型&quot; class=&quot;headerlink&quot; title=&quot;过滤器类型&quot;&gt;&lt;/a&gt;过滤器类型&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;pre 路由之前执行&lt;/li&gt;
+&lt;li&gt;route 路由请求时被调用&lt;/li&gt;
+&lt;li&gt;post 在route和error过滤器之后被过滤&lt;/li&gt;
+&lt;li&gt;error 处理请求发生错误时候被调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;过滤器执行顺序&quot;&gt;&lt;a href=&quot;#过滤器执行顺序&quot; class=&quot;headerlink&quot; title=&quot;过滤器执行顺序&quot;&gt;&lt;/a&gt;过滤器执行顺序&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;order越小，优先级越高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;过滤器是否被执行&quot;&gt;&lt;a href=&quot;#过滤器是否被执行&quot; class=&quot;headerlink&quot; title=&quot;过滤器是否被执行&quot;&gt;&lt;/a&gt;过滤器是否被执行&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;shouldFilter = true(结合yaml控制开启)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;过滤器具体逻辑&quot;&gt;&lt;a href=&quot;#过滤器具体逻辑&quot; class=&quot;headerlink&quot; title=&quot;过滤器具体逻辑&quot;&gt;&lt;/a&gt;过滤器具体逻辑&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;run()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;Routes&quot;&gt;&lt;a href=&quot;#Routes&quot; class=&quot;headerlink&quot; title=&quot;Routes&quot;&gt;&lt;/a&gt;Routes&lt;/h3&gt;&lt;p&gt;路由规则与列表&lt;/p&gt;
+&lt;h2 id=&quot;Spring-Cloud-Sidecar&quot;&gt;&lt;a href=&quot;#Spring-Cloud-Sidecar&quot; class=&quot;headerlink&quot; title=&quot;Spring Cloud Sidecar&quot;&gt;&lt;/a&gt;Spring Cloud Sidecar&lt;/h2&gt;&lt;h3 id=&quot;非JVM语言接入SpringCloud的两种方案&quot;&gt;&lt;a href=&quot;#非JVM语言接入SpringCloud的两种方案&quot; class=&quot;headerlink&quot; title=&quot;非JVM语言接入SpringCloud的两种方案&quot;&gt;&lt;/a&gt;非JVM语言接入SpringCloud的两种方案&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Sidecar&lt;ul&gt;
+&lt;li&gt;必须去实现一个健康检查接口&lt;/li&gt;
+&lt;li&gt;只有状态，服务治理只能从网关层控制流量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;自己实现注册中心API Http接口(推荐)&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
