@@ -11,4 +11,15 @@
         <tag>随笔</tag>
       </tags>
   </entry>
+  <entry>
+    <title><![CDATA[服务器宕机如何处理]]></title>
+    <url>%2F2019%2F05%2F30%2F%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%95%E6%9C%BA%2F</url>
+    <content type="text"><![CDATA[本文整理自一个真实的案例，是楼主负责的业务，在一次大促之前的压测时发现了这个问题，在每次大促之前，我们的测试人员都会对网站进行压力测试，这个时候会查看服务的cpu、内存、load、rt、qps等指标。在一次压测过程中，测试人员发现我们的某一个接口，在qps上升到500以后，CPU使用率急剧升高。 ##问题发现 CPU利用率，又称CPU使用率。顾名思义，CPU利用率是来描述CPU的使用情况的，表明了一段时间内CPU被占用的情况。使用率越高，说明你的机器在这个时间上运行了很多程序，反之较少 ##问题定位 遇到这种问题，首先是登录到服务器，看一下具体情况。 ##定位进程 登录服务器，执行top命令，查看CPU占用情况：]]></content>
+      <categories>
+        <category>技术控</category>
+      </categories>
+      <tags>
+        <tag>宕机</tag>
+      </tags>
+  </entry>
 </search>

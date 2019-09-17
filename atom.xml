@@ -38,4 +38,28 @@
     
   </entry>
   
+  <entry>
+    <title>服务器宕机如何处理</title>
+    <link href="http://yoursite.com/2019/05/30/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%95%E6%9C%BA/"/>
+    <id>http://yoursite.com/2019/05/30/服务器宕机/</id>
+    <published>2019-05-30T02:40:59.000Z</published>
+    <updated>2019-09-17T09:05:16.826Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文整理自一个真实的案例，是楼主负责的业务，在一次大促之前的压测时发现了这个问题，在每次大促之前，我们的测试人员都会对网站进行压力测试，这个时候会查看服务的cpu、内存、load、rt、qps等指标。在一次压测过程中，测试人员发现我们的某一个接口，在qps上升到500以后，CPU使用率急剧升高。</p></blockquote><a id="more"></a><p>##问题发现</p><pre><code>CPU利用率，又称CPU使用率。顾名思义，CPU利用率是来描述CPU的使用情况的，表明了一段时间内CPU被占用的情况。使用率越高，说明你的机器在这个时间上运行了很多程序，反之较少</code></pre><p>##问题定位</p><pre><code>遇到这种问题，首先是登录到服务器，看一下具体情况。</code></pre><p>##定位进程</p><pre><code>登录服务器，执行top命令，查看CPU占用情况：</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本文整理自一个真实的案例，是楼主负责的业务，在一次大促之前的压测时发现了这个问题，在每次大促之前，我们的测试人员都会对网站进行压力测试，这个时候会查看服务的cpu、内存、load、rt、qps等指标。在一次压测过程中，测试人员发现我们的某一个接口，在qps上升到500以后，CPU使用率急剧升高。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="技术控" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E6%8E%A7/"/>
+    
+    
+      <category term="宕机" scheme="http://yoursite.com/tags/%E5%AE%95%E6%9C%BA/"/>
+    
+  </entry>
+  
 </feed>
